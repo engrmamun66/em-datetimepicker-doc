@@ -1,20 +1,20 @@
 ## Project Setup
 ```sh
-npm install
 yarn install
 ```
 
 ## Compile Build Commands
 
 ```sh
-npm run build
+yarn run dev
 yarn run build
+yarn run prod
 ```
 
 ## Run to cdn
 
 ```sh
-yarn run doc
+yarn run cdn
 ```
 
 

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://localhost:4545/assets/em-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="http://localhost:4545/assets/em-datetimepicker.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    
+    
+<style> 
+ 
+</style>
+</head>
+<body class="m-5 container">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    
+    <div class="row">
+        <div class="col-md-4 col-6">
+            <div class="form-group mb-3">
+                <label>Date And Time Picker</label>
+                <input id="input1" type="text" class="emDatetimepicker px-2 form-control">   
+            </div>           
+            <div class="form-group mb-3">
+                <label>Date And Time Picker</label>
+                <input id="input2" type="text" class="emDatetimepicker px-2 form-control" >   
+            </div>  
+            
+            <button onclick="fireMethod()" class="btn btn-primary">Fire Method</button>
+         
+
+            <!-- <div id="em-datetimepicker-visualize" class="border w-100 p-4 mt-3"></div> -->
+            <p>&nbsp;</p> 
+            
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    
+        
+        </div>
+    </div>   
+    
+   <script> 
+     let input1 = document.querySelector('#input1') 
+     input1.emDateTimePicker({
+        theme: 'light',
+        rangePicker: false,
+        timePicker: true,
+        // displayIn: 'bottom_right',
+        // displayIn: 'bottom_left',
+        // displayIn: 'top_left',
+        // displayIn: 'inline_left',
+        // displayIn: 'bottom_center',
+        // displayIn: 'inline_left',
+        // displayIn: 'inline_right',
+    })
+    .onEvent('change_date', (data)=>{
+        console.log('input1',data);
+    })
+
+    let input2 = document.querySelector('#input2')
+    input2.emDateTimePicker({
+        theme: 'dark',
+        rangePicker: false,    
+        displayIn: 'bottom_left',  
+        colors: {
+            primay_bg: '#fcfccf'
+        }  
+    })
+    .onEvent('change_date', (data)=>{
+        console.log('input2', data);
+    })
+    .onEvent('change_time', (data)=>{
+    })
+    .onEvent('cancel', (data)=>{
+        console.log(data);
+    })
+    .onEvent('next_or_previous', (data)=>{
+        console.log(data);
+    })
+    
+
+   
+    function fireMethod(){
+     
+        // input1.emDateTimePicker('show')
+        input2.emDateTimePicker('show')
+      
+     
+         
+    }
+        
+   
+    let options = {
+        // minDate: '01/06/2024',
+        // maxDate: '01/08/2024',
+        startDate: '01/22/2024', // 2024-01-02 || 1 Jan 2024 
+        endDate: '02/01/2024', // 2024-02-02 || 2 Feb 2024 || 
+        rangePicker: true,
+        adjustWeekday: 0,
+        buttons: {
+            todayBtn: true,
+            applyBtn: 'Apply',
+            cancelBtn: 'Cancel',
+        },
+        monthShorts: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+        // timePicker
+        timePicker: true,
+        // onlyTimePicker: true,
+        minuteStep: 5,
+        minuteStep: 5,
+        use24Format: false,
+    }
+
+    let theme = 'light';        
+
+
+        
+        
+   </script>
+</body>
+</html>
