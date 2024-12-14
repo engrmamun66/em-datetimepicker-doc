@@ -31,11 +31,11 @@ const routes = [
             },
         ],
     },
-    {
-        path: "/*",
-        name: 'error',
-        component: ErrorView,
-    },
+    // {
+    //     path: "/*",
+    //     name: 'error',
+    //     component: ErrorView,
+    // },
     // Catch-all route for 404 errors
     { 
         path: '/:pathMatch(.*)*',
