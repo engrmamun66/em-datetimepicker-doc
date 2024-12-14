@@ -1,7 +1,11 @@
 import { createRouter, createWebHashHistory, isNavigationFailure } from "vue-router";
 
 import HomeView from "./pages/home.vue";
+
 import ContactView from "./pages/contact.vue";
+import PersonView from "./pages/contact-child/person.vue";
+import CompanyView from "./pages/contact-child/company.vue";
+
 import ErrorView from "./pages/error.vue";
 
 const routes = [
@@ -14,6 +18,18 @@ const routes = [
         path: "/contact",
         name: 'contact',
         component: ContactView,
+        children: [
+            {
+                path: 'person',
+                name: 'contact > person',
+                component: PersonView,
+            },
+            {
+                path: 'company',
+                name: 'contact > company',
+                component: CompanyView,
+            },
+        ],
     },
     {
         path: "/*",
