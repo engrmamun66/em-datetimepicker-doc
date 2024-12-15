@@ -3,7 +3,37 @@ import moment from 'moment/moment';
 const helper = { 
     randomBetween: function (min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min)
-    },   
+    }, 
+    localStorage: function (name) {
+        return {
+          get value() {
+            if (typeof process == "undefined") {
+              var process = { client: true };
+            }
+            if (process.client && globalThis.localStorage) {
+              let data = globalThis.localStorage.getItem(name);
+              if (
+                (data && data?.startsWith("{") && data?.endsWith("}")) ||
+                (data?.startsWith("[") && data?.endsWith("]"))
+              ) {
+                data = JSON.parse(data);
+              }
+              return data;
+            }
+          },
+          set value(value) {
+            if (typeof process == "undefined") {
+              var process = { client: true };
+            }
+            if (process.client) {
+              if (value && typeof value === "object") {
+                value = JSON.stringify(value);
+              }
+              localStorage.setItem(name, value);
+            }
+          },
+        };
+    },  
     device: function() {
         const getType = () => {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

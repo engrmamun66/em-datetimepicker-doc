@@ -12,9 +12,7 @@
         <li> <router-link :to="{name: 'contact > company'}">Contact</router-link></li>   
       </ul>
 
-     <h1>Contact</h1>
-
-     <routerView />
+     <h1>Contact</h1> 
 
 </template>
 

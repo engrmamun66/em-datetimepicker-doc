@@ -5,7 +5,11 @@ import App from './App.vue';
 import { send_css_in_header, minified_css } from './minified-css';
 import { emitter, utils } from './import-hub';
 import moment from 'moment/moment';
-import { router } from './routes';
+import { router } from './routes/index';
+
+if(!utils.helper.localStorage('doc_version').value){
+    utils.helper.localStorage('doc_version').value = 'v-1.0.0';
+}
 
 send_css_in_header(minified_css);
 
@@ -26,7 +30,10 @@ function mountTheApp(){
         app_div.style.display = 'none';
         document.body.append(app_div);
         app
-        .provide('utils', utils)
+        .provide('http', utils.http)
+        .provide('helper', utils.helper)
+        .provide('cookie', utils.cookie)
+        .provide('doc_version', utils.helper.localStorage('doc_version').value)
         .provide('emitter', emitter)
         .mount('#em-datetimepicker-doc');
     } catch (error) {
