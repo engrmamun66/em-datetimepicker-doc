@@ -15,7 +15,6 @@ let menuItems = ref([
     {
         group: true,
         name: 'General',
-
     },
     {
         name: 'Initialize',

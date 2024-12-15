@@ -7,14 +7,14 @@ import CompanyView from '../pages/v-1.0.0/contact-child/company.vue'
 
 import ErrorView from '../pages/error.vue'
 
-const routes = [
+const routes = [ 
     {
-        path: "/",
+        path: "/v-1.0.0/",
         name: 'home',
         component: HomeView,
     },
     {
-        path: "/contact",
+        path: "/v-1.0.0/contact",
         name: 'contact',
         component: ContactView,
         children: [
