@@ -20,14 +20,9 @@ onMounted(()=>{
       </ul>
 
       <showCode lang="html" :code="`<h1>Hello world</h1>`"></showCode>
-      <showCode lang="html" :code="`\
-      <h1>Hello world</h1>\
-      \
-      `"></showCode>
+      <showCode lang="html" :code="`<h1>Hello world</h1>`"></showCode>
      
-      <showCode lang="javascript" :code="`\
-      let name = 'Abdullah Al-Mamun'\
-      `"></showCode>
+      <showCode lang="javascript" :code="`let name = 'Abdullah Al-Mamun'`"></showCode>
 
      <routerView></routerView>
 

@@ -10,9 +10,8 @@ let router = useRouter()
 let expand = ref(true);
 let activeMenu = ref('Home'); 
 
-let injected_version = inject('version')
 let helper = inject('helper')
-let current_version = ref(injected_version); 
+let version = ref(inject('version')); 
 
 if(expand.value) document.body.classList.add('expander')
 watch(expand, (nVal, oVal)=>{
@@ -28,7 +27,7 @@ let menuItems = ref([
     },
     {
         name: 'Initialize',
-        path: '/',
+        path: { name: 'home'},
         iconClass: 'bx bx-grid-alt nav-icon',
         badge: { clasName: 'warning', text: '3' },
         childs: [
@@ -82,8 +81,8 @@ function onChangeVersion({target: {value: version}}){
         </div>
         <div class="version-display-area">
           <span class="user-name">Documentaion </span> 
-          <strong>{{ current_version }} 
-            <span v-if="VERSIONS.at(-1) === current_version" class="badge badge-success">Latest</span> 
+          <strong>{{ version }} 
+            <span v-if="VERSIONS.at(-1) === version" class="badge badge-success">Latest</span> 
             <span v-else class="badge badge-warning">Older</span> 
           </strong>
         </div>
@@ -92,7 +91,7 @@ function onChangeVersion({target: {value: version}}){
       <div class="sidebar-search">
         <div>
           <div class="input-group">
-            <select class="form-control" :value="current_version" @change="onChangeVersion" >
+            <select class="form-control" :value="version" @change="onChangeVersion" >
                 <option v-for="ver in VERSIONS" :values="ver">{{ ver }}</option>
               </select>
           </div>

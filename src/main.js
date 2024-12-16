@@ -10,11 +10,12 @@ import { router } from './routes/index';
 
 const VERSIONS = [
     'v-1.0.0',
-    'v-2.0.0',
+    // 'v-2.0.0',
 ]
 
 if(!utils.helper.localStorage('version').value){
     utils.helper.localStorage('version').value = VERSIONS.at(-1);
+    // utils.helper.localStorage('version').value = VERSIONS.at(0);
 }
 
 send_css_in_header(minified_css);
