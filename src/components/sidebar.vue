@@ -50,7 +50,7 @@ let VERSIONS = inject('VERSIONS');
 
 function onChangeVersion({target: {value: version}}){ 
   helper.localStorage('version').value = version;
-  router.replace({name: route.name, params: { version }})
+  router.replace({path: `/${version}`})
   console.log({version});
   setTimeout(() => {
     window.location.reload()
@@ -75,14 +75,17 @@ function onChangeVersion({target: {value: version}}){
           <i class='bx bx-left-arrow-circle' ></i>
         </div>
       </div>
-      <div class="sidebar-header">
+      <div class="sidebar-header d-flex align-items-center">
         <div class="user-pic">
           <img class="img-responsive img-rounded" src="../assets/img/calendar.png"
             alt="User picture">
         </div>
-        <div class="user-info">
-          <span class="user-name">Documentaion  
-          </span> 
+        <div class="version-display-area">
+          <span class="user-name">Documentaion </span> 
+          <strong>{{ current_version }} 
+            <span v-if="VERSIONS.at(-1) === current_version" class="badge badge-success">Latest</span> 
+            <span v-else class="badge badge-warning">Older</span> 
+          </strong>
         </div>
       </div>
       <!-- sidebar-header  -->
@@ -147,7 +150,7 @@ function onChangeVersion({target: {value: version}}){
         <span class="badge-sonar"></span>
       </a>
       <a href="#">
-        <i class="fa fa-power-off"></i>
+        <i class="bx bx-power-off"></i>
       </a>
     </div>
   </nav> 
@@ -337,9 +340,10 @@ function onChangeVersion({target: {value: version}}){
   width: 100%;
 }
 
-.sidebar-wrapper .sidebar-header .user-info {
+.sidebar-wrapper .sidebar-header .version-display-area {
   display: flex;
-  align-items: center;
+  align-items: start;
+  flex-direction: column;
 }
 
 /*-----------------------sidebar-search------------------------*/
@@ -572,8 +576,8 @@ function onChangeVersion({target: {value: version}}){
   box-shadow: none;
 }
 
-.emdoc-theme .sidebar-wrapper .sidebar-header .user-info .user-role,
-.emdoc-theme .sidebar-wrapper .sidebar-header .user-info .user-status,
+.emdoc-theme .sidebar-wrapper .sidebar-header .version-display-area .user-role,
+.emdoc-theme .sidebar-wrapper .sidebar-header .version-display-area .user-status,
 .emdoc-theme .sidebar-wrapper .sidebar-search .input-group-text,
 .emdoc-theme .sidebar-wrapper .sidebar-brand > a,
 .emdoc-theme .sidebar-wrapper .sidebar-menu ul li a,
@@ -583,7 +587,7 @@ function onChangeVersion({target: {value: version}}){
 
 .emdoc-theme .sidebar-wrapper .sidebar-menu ul li:hover > a,
 .emdoc-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a,
-.emdoc-theme .sidebar-wrapper .sidebar-header .user-info,
+.emdoc-theme .sidebar-wrapper .sidebar-header .version-display-area,
 .emdoc-theme .sidebar-wrapper .sidebar-brand > a:hover,
 .emdoc-theme .sidebar-footer > a:hover i {
   color: #b8bfce;
@@ -612,8 +616,12 @@ function onChangeVersion({target: {value: version}}){
 
 .emdoc-theme .sidebar-wrapper .sidebar-menu ul li a i,
 .emdoc-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown div,
-.emdoc-theme .sidebar-wrapper .sidebar-search .input-group-text {
+.emdoc-theme .sidebar-wrapper .sidebar-search .form-control {
   background: #3a3f48;
+}
+.emdoc-theme .sidebar-wrapper .sidebar-search .form-control {
+  color: white;
+  border: 1px solid #484848;
 }
 
 .emdoc-theme .sidebar-wrapper .sidebar-menu .header-menu span {

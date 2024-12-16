@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, inject } from 'vue';
+import showCode from '../../components/showCode.vue'
 const version = inject('version')
 
 
@@ -18,8 +19,17 @@ onMounted(()=>{
         <li><router-link :to="{name: 'contact', params: {version}}">Contact page</router-link></li> 
       </ul>
 
+      <showCode lang="html" :code="`<h1>Hello world</h1>`"></showCode>
+      <showCode lang="html" :code="`\
+      <h1>Hello world</h1>\
+      \
+      `"></showCode>
+     
+      <showCode lang="javascript" :code="`\
+      let name = 'Abdullah Al-Mamun'\
+      `"></showCode>
 
-      <routerView></routerView>
+     <routerView></routerView>
 
 <!-- 
      <hr v-for="x in 100" >
