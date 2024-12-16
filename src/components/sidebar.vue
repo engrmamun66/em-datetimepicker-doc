@@ -11,7 +11,7 @@ let expand = ref(true);
 let activeMenu = ref('Home'); 
 
 let helper = inject('helper')
-let version = ref(inject('version')); 
+let version = inject('version'); 
 
 if(expand.value) document.body.classList.add('expander')
 watch(expand, (nVal, oVal)=>{
@@ -27,7 +27,23 @@ let menuItems = ref([
     },
     {
         name: 'Initialize',
-        path: { name: 'home'},
+        path: { name: 'home', params: { version }},
+        iconClass: 'bx bx-grid-alt nav-icon',
+        badge: { clasName: 'warning', text: '3' },
+        childs: [
+            {
+                name: 'Child -1',
+                path: '/',
+            },
+            {
+                name: 'Child -2',
+                path: '/',
+            },
+        ]
+    },
+    {
+        name: 'Options',
+        path: { name: 'contact', params: { version }},
         iconClass: 'bx bx-grid-alt nav-icon',
         badge: { clasName: 'warning', text: '3' },
         childs: [
@@ -54,6 +70,17 @@ function onChangeVersion({target: {value: version}}){
   setTimeout(() => {
     window.location.reload()
   }, 0);
+}
+
+function toggleLoopItem (data, index, key = "expand") {
+  if (!data) return;
+  data?.forEach((item, i) => {
+    if (i == index) {
+      item[key] = !(item[key] ?? false);
+    } else {
+      item[key] = false;
+    }
+  });
 }
 
 
@@ -108,13 +135,13 @@ function onChangeVersion({target: {value: version}}){
                 </template>
                 <template v-else>
                     <li class="sidebar-dropdown" :class="{'active': item?.expand}" >
-                        <a href="#" @click.stop="item.expand = !(!!(item?.expand))">
+                        <router-link :to="item.path" @click.stop="toggleLoopItem(menuItems, i); ">
                             <i :class="[item.iconClass]"></i>
                             <span>{{ item.name }}  </span>
                             <span v-if="item?.badge" class="badge badge-pill" :class="[`badge-${item.badge?.clasName}`]" >
                                 {{ item.badge?.title }}
                             </span>
-                        </a>
+                        </router-link>
                         <template v-if="item?.childs?.length">
                             <div class="sidebar-submenu" :class="{'show-childs': item?.expand}" >
                                 <ul>

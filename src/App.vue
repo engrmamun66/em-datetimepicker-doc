@@ -13,9 +13,6 @@ console.log({route, router});
 
 <template>
     <SideBar>
-        <ul>
-            <li><router-link :to="{name: 'home', params: {version}}">Home</router-link></li>
-        </ul>
         <routerView />
     </SideBar>
     

@@ -1,30 +1,38 @@
 <script setup>
 import { onMounted, inject } from 'vue';
 import showCode from '../../components/showCode.vue'
+import Tabs from '../../components/tabs.vue'
 const version = inject('version')
 
-
-onMounted(()=>{
-     console.log('home.vue');
-})
+ 
  
 
 </script>
 
 <template>
-     <h1>Hello World</h1>
-     <h2>V-1.0.0</h2> 
+     <h1>Markup</h1> 
+     <p>
+          The following are examples of supported markup. On their own, these will not provide a datepicker widget; you will need to instantiate the datepicker on the markup.
+     </p>
 
-     <ul>
-        <li><router-link :to="{name: 'contact', params: {version}}">Contact page</router-link></li> 
-      </ul>
+     <h1>Script Loading Process</h1> 
+
+    
 
       <showCode lang="html" :code="`<h1>Hello world</h1>`"></showCode>
       <showCode lang="html" :code="`<h1>Hello world</h1>`"></showCode>
      
       <showCode lang="javascript" :code="`let name = 'Abdullah Al-Mamun'`"></showCode>
 
-     <routerView></routerView>
+      <Tabs :tabs="['JQuery', 'Javascript']">
+          <template #slot="{i}">
+               <showCode v-show="i==0" lang="javascript" :inTabs="true" :code="`let name = 'Jquery Example'`"></showCode>
+               <showCode v-show="i==1" lang="javascript" :inTabs="true" :code="`let name = 'Javascript Example'`"></showCode>
+          </template>
+      </Tabs>
+
+
+      
 
 <!-- 
      <hr v-for="x in 100" >

@@ -4,7 +4,7 @@
       <i class="bx bxs-copy"></i>
     </span>
     <span class="copied" v-if="copied">Copied</span>
-<pre ref="pretag" class="line-numbers" :contenteditable="contenteditable">
+<pre ref="pretag" class="line-numbers" :contenteditable="contenteditable" :class="{'in-tabs': inTabs}">
 <code :class="`language-${lang}`" ref="codeBlock">{{ trimmedCode }}</code>
 </pre>
   </div>
@@ -36,6 +36,11 @@ export default {
     code: {
       type: String,
       required: true,
+    },
+    inTabs: {
+      type: String,
+      required: true,
+      default: false,
     },
   },
   data() {
@@ -120,6 +125,9 @@ export default {
   overflow: auto;
   font-size: 0.9rem;
   padding-right: 40px;
+}
+.code-view-wrapper pre.in-tabs {
+  margin-top: 10px;
 }
 
 .code-view-wrapper pre:focus-visible {
