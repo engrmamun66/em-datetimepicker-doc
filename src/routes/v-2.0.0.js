@@ -9,26 +9,17 @@ import ErrorView from '../pages/error.vue'
 
 const routes = [
     {
-        path: "/v-2.0.0/",
+        path: "/:version",
         name: 'home',
         component: HomeView,
-    },
-    {
-        path: "/v-2.0.0/contact",
-        name: 'contact',
-        component: ContactView,
         children: [
             {
-                path: 'person',
-                name: 'contact > person',
-                component: PersonView,
+                path: "/:version/contact",
+                name: 'contact',
+                component: ContactView
             },
-            {
-                path: 'company',
-                name: 'contact > company',
-                component: CompanyView,
-            },
-        ],
+            
+        ]
     },
     {
         path: "/*",

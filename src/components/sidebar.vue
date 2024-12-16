@@ -1,13 +1,23 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { values } from 'lodash';
+import { ref, watch, inject, nextTick } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
+
+
+let route = useRoute()
+let router = useRouter()
 
 let expand = ref(true);
-let activeMenu = ref('Home');
+let activeMenu = ref('Home'); 
 
-if(expand.value) document.body.classList.add('expander');
+let injected_version = inject('version')
+let helper = inject('helper')
+let current_version = ref(injected_version); 
+
+if(expand.value) document.body.classList.add('expander')
 watch(expand, (nVal, oVal)=>{
-    if(nVal) document.body.classList.add('expander');
-    else document.body.classList.remove('expander');
+    if(nVal) document.body.classList.add('expander')
+    else document.body.classList.remove('expander')
 })
 
 
@@ -35,6 +45,19 @@ let menuItems = ref([
      
     
 ])
+
+let VERSIONS = inject('VERSIONS');
+
+function onChangeVersion({target: {value: version}}){ 
+  helper.localStorage('version').value = version;
+  router.replace({name: route.name, params: { version }})
+  console.log({version});
+  setTimeout(() => {
+    window.location.reload()
+  }, 0);
+}
+
+
 </script>
 
 <template>
@@ -66,9 +89,9 @@ let menuItems = ref([
       <div class="sidebar-search">
         <div>
           <div class="input-group">
-            <select class="form-control">
-              <option>-Select-</option>
-            </select>
+            <select class="form-control" :value="current_version" @change="onChangeVersion" >
+                <option v-for="ver in VERSIONS" :values="ver">{{ ver }}</option>
+              </select>
           </div>
         </div>
       </div>

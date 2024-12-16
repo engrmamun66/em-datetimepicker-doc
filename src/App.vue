@@ -2,7 +2,9 @@
 import { useRoute, useRouter } from "vue-router";
 import { provide, inject, ref, computed } from 'vue';
 import SideBar from './components/sidebar.vue'
-let doc_version = inject('doc_version');
+
+const version = inject('version')
+
 
 let route = useRoute();
 let router = useRouter(); 
@@ -12,8 +14,7 @@ console.log({route, router});
 <template>
     <SideBar>
         <ul>
-            <li><router-link :to="{name: 'home'}">Home</router-link></li>
-            <li> <router-link :to="{name: 'contact'}">Contact</router-link></li>   
+            <li><router-link :to="{name: 'home', params: {version}}">Home</router-link></li>
         </ul>
         <routerView />
     </SideBar>

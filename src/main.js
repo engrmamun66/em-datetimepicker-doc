@@ -7,14 +7,19 @@ import { emitter, utils } from './import-hub';
 import moment from 'moment/moment';
 import { router } from './routes/index';
 
-if(!utils.helper.localStorage('doc_version').value){
-    utils.helper.localStorage('doc_version').value = 'v-1.0.0';
+
+const VERSIONS = [
+    'v-1.0.0',
+    'v-2.0.0',
+]
+
+if(!utils.helper.localStorage('version').value){
+    utils.helper.localStorage('version').value = VERSIONS.at(-1);
 }
 
 send_css_in_header(minified_css);
 
 globalThis.moment = moment;  
-
 
 globalThis.printWarning = function(message='This is a warning', {size='22px'}={}){
     console.log(`%c ${message}`, `color:red;font-size:${size};background-color:yellow;padding:10px 20px 10px 10px;border-radius:5px;margin:10px 0px;font-family: system-ui;border:1px solid red`)
@@ -33,7 +38,8 @@ function mountTheApp(){
         .provide('http', utils.http)
         .provide('helper', utils.helper)
         .provide('cookie', utils.cookie)
-        .provide('doc_version', utils.helper.localStorage('doc_version').value)
+        .provide('VERSIONS', VERSIONS)
+        .provide('version', utils.helper.localStorage('version').value)
         .provide('emitter', emitter)
         .mount('#em-datetimepicker-doc');
     } catch (error) {

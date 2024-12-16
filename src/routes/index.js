@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import helper from "../utilities/helper";
-let version = helper.localStorage('doc_version').value
+let version = helper.localStorage('version').value
 
 import v_1_0_0 from "./v-1.0.0";
 import v_2_0_0 from "./v-2.0.0";
