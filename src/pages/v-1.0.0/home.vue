@@ -15,9 +15,15 @@ let script_file = `<script src="http://localhost:3200/assets/em-datetimepicker-d
 </script>
 
 <template>
-     <h1>Markup</h1> 
+     <h1>Introduction</h1> 
      <p>
-          The following are examples of supported markup. On their own, these will not provide a datepicker widget; you will need to instantiate the datepicker on the markup.
+          
+          <div class="hl low-b">Em-DateTimePicker </div> is a vanila javascript cdn solution to use, date time picker in any website with any platform.
+          <span class="hl red mt-2">HTML</span>
+          <span class="hl cayan">Vue</span>
+          <span class="hl yellow">React</span>
+          <span class="hl green">Angular</span>
+          
      </p>
 
      <h1>Script Loading Process</h1> 
@@ -29,23 +35,14 @@ let script_file = `<script src="http://localhost:3200/assets/em-datetimepicker-d
           </template>
       </Tabs>
 
+     
+
+
      <numberedList :use-border="false" >
           <li>ONe</li>
           <li>Two </li>
           <li>Three</li>
-     </numberedList>
-
-     <div class="row">
-          <!-- <div class="col-6">
-               <Note></Note>
-          </div>
-          <div class="col-6">
-               <Note></Note>
-          </div>
-          <div class="col-6">
-               <Note></Note>
-          </div> -->
-     </div>
+     </numberedList>      
 
 
      <myTable></myTable>

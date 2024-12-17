@@ -12,6 +12,12 @@ ul{
 h1, .h1{
     font-size: 25px;
 }
+h2, .h2{
+    font-size: 22px;
+}
+h3, .h3{
+    font-size: 20px;
+}
 
 .cp{
     cursor: pointer !important;
@@ -68,4 +74,40 @@ h1, .h1{
     color: #fff;
     background-color: #007bff;
 }
+
+kbd{
+   background-color: #3a3f48; 
+}
+
+.hl {
+    display: inline-block;
+    background: linear-gradient(0deg, #f7f7f7, #eaeaea);
+    color: #474747;
+    padding: 0px 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.811);
+    margin-bottom: 3px;
+    &:has(~.hl){
+        margin-right: 5px;
+    }
+    &.low-b{
+        border-radius: 3px;
+    }
+    &.green{
+        background: linear-gradient(0deg, #54ef54, #ffffff00);
+    }
+    &.yellow{
+        background: linear-gradient(0deg, #f0f75f, #ffffff00);
+    }
+    &.cayan{
+        background: linear-gradient(0deg, #2bc8c3, #ffffff00);
+    }
+    &.red{
+        background: linear-gradient(0deg, #eb6839, #ffffff00);
+    }
+}
+
+  
 
