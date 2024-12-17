@@ -1,4 +1,14 @@
 <script setup>
+/**
+ * Use Example
+  
+ <Tabs :tabs="['JQuery', 'Javascript']">
+      <template #slot="{i}">
+            <showCode v-show="i==0" lang="javascript" :inTabs="true" :code="`let name = 'Jquery Example'`"></showCode>
+            <showCode v-show="i==1" lang="javascript" :inTabs="true" :code="`let name = 'Javascript Example'`"></showCode>
+      </template>
+  </Tabs>
+ */
 import showCodeView from './showCode.vue'
 import { ref, defineProps } from "vue";
 let { tabs } = defineProps({
@@ -44,22 +54,24 @@ function toggleLoopItem (data, index, key = "show") {
 
 <style>
 
+ 
 .edoc-tabs {
   margin-top: 20px;
   padding: 0;
   list-style: none;
   position: relative;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--borderColor);
 }
 .edoc-tabs .active-tab {
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+  border-top: 1px solid var(--borderColor);
+  border-left: 1px solid var(--borderColor);
+  border-right: 1px solid var(--borderColor);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   border-bottom: none;
   position: relative;
   color: black;
+  background: linear-gradient(180deg, #3a3f4817, transparent);
 }
 .edoc-tabs .active-tab:after {
   width: 100%;
@@ -73,7 +85,7 @@ function toggleLoopItem (data, index, key = "show") {
 .edoc-tabs li {
   display: inline-block;
   cursor: pointer;
-  color: #3a5ea7;
+  color: #303030;
   padding: 5px 10px;
 }
 .edoc-tabs li:first-child {

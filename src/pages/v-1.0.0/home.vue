@@ -2,8 +2,13 @@
 import { onMounted, inject } from 'vue';
 import showCode from '../../components/showCode.vue'
 import Tabs from '../../components/tabs.vue'
+import Note from '../../components/note.vue'
+import numberedList from '../../components/numberedList.vue'
+import myTable from '../../components/myTable.vue'
 const version = inject('version')
 
+let script_js = `<link rel="stylesheet" href="http://localhost:3200/assets/em-datetimepicker-documentaion.min.css">`
+let script_file = `<script src="http://localhost:3200/assets/em-datetimepicker-documentaion.min.js">` + '<' + '/' + 'script' + '>'
  
  
 
@@ -17,19 +22,33 @@ const version = inject('version')
 
      <h1>Script Loading Process</h1> 
 
-    
-
-      <showCode lang="html" :code="`<h1>Hello world</h1>`"></showCode>
-      <showCode lang="html" :code="`<h1>Hello world</h1>`"></showCode>
-     
-      <showCode lang="javascript" :code="`let name = 'Abdullah Al-Mamun'`"></showCode>
-
-      <Tabs :tabs="['JQuery', 'Javascript']">
+      <Tabs :tabs="['CSS', 'Script']">
           <template #slot="{i}">
-               <showCode v-show="i==0" lang="javascript" :inTabs="true" :code="`let name = 'Jquery Example'`"></showCode>
-               <showCode v-show="i==1" lang="javascript" :inTabs="true" :code="`let name = 'Javascript Example'`"></showCode>
+               <showCode v-show="i==0" lang="javascript" :inTabs="true" :code="script_js"></showCode>
+               <showCode v-show="i==1" lang="javascript" :inTabs="true" :code="script_file"></showCode>
           </template>
       </Tabs>
+
+     <numberedList :use-border="false" >
+          <li>ONe</li>
+          <li>Two </li>
+          <li>Three</li>
+     </numberedList>
+
+     <div class="row">
+          <!-- <div class="col-6">
+               <Note></Note>
+          </div>
+          <div class="col-6">
+               <Note></Note>
+          </div>
+          <div class="col-6">
+               <Note></Note>
+          </div> -->
+     </div>
+
+
+     <myTable></myTable>
 
 
       

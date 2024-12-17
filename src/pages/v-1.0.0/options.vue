@@ -14,7 +14,7 @@ onMounted(()=>{
 
 <template>
 
-     <h1>Contact</h1> 
+     <h1>Options</h1> 
 
 </template>
 

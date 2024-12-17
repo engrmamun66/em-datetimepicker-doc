@@ -38,7 +38,7 @@ export default {
       required: true,
     },
     inTabs: {
-      type: String,
+      type: Boolean,
       required: true,
       default: false,
     },
@@ -138,7 +138,11 @@ export default {
   position: relative;
   padding-left: 1.8em;
   counter-reset: linenumber;
-  line-height: 18px;
+  line-height: 25px;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    line-height: 2; 
 }
 
 .copycode {
@@ -149,6 +153,7 @@ export default {
   cursor: pointer;
   padding: 2px 5px 0px 5px;
   border-radius: 3px;
+  color: rgb(203, 203, 203);
 }
 
 .copycode:hover,
@@ -156,7 +161,8 @@ export default {
   background-color: #2e323a;
 }
 
-.copycode > i {
+.copycode:hover > i,
+.copycode:has(~ .copied) > i {
   color: white;
 }
 
