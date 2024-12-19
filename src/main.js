@@ -10,7 +10,7 @@ import { router } from './routes/index';
 
 const VERSIONS = [
     'v-1.0.0',
-    // 'v-2.0.0',
+    'v-2.0.0',
 ]
 
 if(!utils.helper.localStorage('version').value){
