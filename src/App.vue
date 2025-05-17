@@ -8,7 +8,6 @@ const version = inject('version')
 
 let route = useRoute();
 let router = useRouter(); 
-console.log({route, router});
 </script>
 
 <template>

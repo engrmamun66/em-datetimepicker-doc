@@ -1,13 +1,18 @@
 <template>
   <div class="code-view-wrapper">
+    <div>
+      <slot name="header"></slot>
+    </div>
     <span class="copycode" tooltipp="copy" flow="left" @click="copyToClipBoard">
       <i class="bx bxs-copy"></i>
     </span>
     <span class="copied" v-if="copied">Copied</span>
-<!-- <pre ref="pretag" class="line-numbers" :contenteditable="contenteditable" :class="{'in-tabs': inTabs}"> -->
-<pre ref="pretag"class="line-numbers"><code v-html="highlightHTML(code)"></code></pre>
- 
+    <pre ref="pretag"class="line-numbers"><code v-html="highlightCode(code)"></code></pre>
+    <div>
+      <slot></slot>
+    </div>
   </div>
+  
 </template>
 
 <script setup>
@@ -15,39 +20,79 @@ import {ref, onMounted } from 'vue'
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'
 import 'highlight.js/styles/github.css'
+
+import javascript from 'highlight.js/lib/languages/javascript'
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('xml', xml)
+
 import { html as beautifyHtml } from 'js-beautify';
 
 let props = defineProps({
     lang: {
       type: String,
       required: true,
-      default: "javascript", // Fallback language
+      default: 'html',
+      validation(val){
+        return ['html', 'javascript'].includes()
+      }
     },
     code: {
       type: String,
       required: true,
+      default: '',
     },
     inTabs: {
       type: Boolean,
       required: true,
       default: false,
     },
+    trimCount: {
+      type: String,
+      required: false,
+      default: 'standard', 
+    },
 })
 
-hljs.registerLanguage('xml', xml)
+
 
 let pretag = ref(null)
 let copied = ref(false)
 let contenteditable = ref(false)
 
-function highlightHTML(html) {
-    let formattedHTML = beautifyHtml(html, {
+
+function fixIndentaion(code, lang){
+  if(lang === 'javascript'){
+    let lines = []
+    
+    if(props.trimCount == 'standard'){
+      lines = String(code).split('\n').map((line, i) => line.replace(new RegExp(`^\\s{8}`), ''), '')
+    }
+    else {
+      lines = String(code).split('\n').map((line, i) => line.replace(new RegExp(`^\\s{7}`), ''), '')
+    }
+ 
+    return lines.join('\n')
+    
+  } else {
+    return code
+  }
+}
+
+function highlightCode(code) {
+  const language = props.lang === 'javascript' ? 'javascript' : 'xml';
+  code = fixIndentaion(code, language)
+  const source = language === 'xml'
+    ? beautifyHtml(code, {
         indent_size: 2,
         preserve_newlines: true,
-        wrap_line_length: 120,
-    });
-    return hljs.highlight(formattedHTML, { language: 'xml' }).value;
+        wrap_line_length: 60,
+      })
+    : code;
+
+  return hljs.highlight(source, { language }).value;
 }
+
+
 
 function copyToClipBoard() { 
   contenteditable.value = true;
@@ -122,7 +167,7 @@ code[class*="language-"], pre[class*="language-"] {
   padding: 2px 5px 0px 5px;
   border-radius: 3px;
   color: rgb(255, 255, 255);
-  background-color: #2e323a6b;
+  background-color: #656f7d;
 }
 
 .copycode:hover,

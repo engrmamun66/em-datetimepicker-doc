@@ -119,7 +119,7 @@ function toggleLoopItem (data, index, key = "expand") {
         <div>
           <div class="input-group">
             <select class="form-control" :value="version" @change="onChangeVersion" >
-                <option v-for="ver in VERSIONS" :values="ver">{{ ver }}</option>
+                <option v-for="ver in VERSIONS.toReversed()" :values="ver">{{ ver }}</option>
               </select>
           </div>
         </div>
