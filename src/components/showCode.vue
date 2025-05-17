@@ -111,13 +111,13 @@ function copyToClipBoard() {
           copied.value = true;
           setTimeout(() => {
             copied.value = false;
-          }, 1000);
+            selection.removeAllRanges();
+          }, 700);
         }
       } catch (err) {
         console.error("Error copying content: ", err);
       }
 
-      selection.removeAllRanges();
       contenteditable.value = false;
     }
 } 
