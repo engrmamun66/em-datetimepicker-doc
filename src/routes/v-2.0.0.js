@@ -10,6 +10,11 @@ import ErrorView from '../pages/error.vue'
 const routes = [
     {
         path: "/:version",
+        name: 'root',
+        component: HomeView, 
+    },
+    {
+        path: "/:version",
         name: 'home',
         component: HomeView,
         children: [

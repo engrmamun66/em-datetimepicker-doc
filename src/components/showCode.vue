@@ -4,30 +4,20 @@
       <i class="bx bxs-copy"></i>
     </span>
     <span class="copied" v-if="copied">Copied</span>
-<pre ref="pretag" class="line-numbers" :contenteditable="contenteditable" :class="{'in-tabs': inTabs}">
-<code :class="`language-${lang}`" ref="codeBlock">{{ trimmedCode }}</code>
-</pre>
+<!-- <pre ref="pretag" class="line-numbers" :contenteditable="contenteditable" :class="{'in-tabs': inTabs}"> -->
+<pre ref="pretag"class="line-numbers"><code v-html="highlightHTML(code)"></code></pre>
+ 
   </div>
 </template>
 
-<script>
-import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css"; // Add your desired Prism theme
-import "prismjs/plugins/line-numbers/prism-line-numbers.css"; // For line numbers
+<script setup>
+import {ref, onMounted, defineProps } from 'vue'
+import hljs from 'highlight.js/lib/core'
+import xml from 'highlight.js/lib/languages/xml'
+import 'highlight.js/styles/github.css'
+import { html as beautifyHtml } from 'js-beautify';
 
-// Dynamically load the language based on the prop
-const loadLanguage = async (lang) => {
-  try {
-    // await import(`prismjs/components/prism-${lang}`);
-    await import(`prismjs/components/index.js`);
-  } catch (e) {
-    console.warn(`Language '${lang}' not found in Prism.js.`);
-  }
-};
-
-export default {
-  name: "ShowCode",
-  props: {
+let props = defineProps({
     lang: {
       type: String,
       required: true,
@@ -42,72 +32,51 @@ export default {
       required: true,
       default: false,
     },
-  },
-  data() {
-    return {
-      copied: false,
-      contenteditable: false,
-    };
-  },
-  computed: {
-    trimmedCode() {
-      return this.code
-        .split("\n") // Split code into lines
-        .map((line) => line.trimEnd()) // Trim trailing spaces
-        .join("\n") // Join back into a single string
-        .trim(); // Remove overall leading/trailing newlines
-    },
-  },
-  watch: {
-    code() {
-      this.highlightCode();
-    },
-    lang() {
-      this.loadAndHighlight();
-    },
-  },
-  mounted() {
-    this.loadAndHighlight();
-  },
-  methods: {
-    async loadAndHighlight() {
-      await loadLanguage(this.lang);
-      this.highlightCode();
-    },
-    highlightCode() {
-      if (this.$refs.codeBlock) {
-        Prism.highlightElement(this.$refs.codeBlock);
-      }
-    },
-    copyToClipBoard() {
-      this.contenteditable = true;
-      const preElement = this.$refs.pretag;
-      if (preElement) {
-        const range = document.createRange();
-        const selection = window.getSelection();
+})
 
-        range.selectNodeContents(preElement);
-        selection.removeAllRanges();
-        selection.addRange(range);
+hljs.registerLanguage('xml', xml)
 
-        try {
-          const successful = document.execCommand("copy");
-          if (successful) {
-            this.copied = true;
-            setTimeout(() => {
-              this.copied = false;
-            }, 1000);
-          }
-        } catch (err) {
-          console.error("Error copying content: ", err);
+let pretag = ref(null)
+let copied = ref(false)
+let contenteditable = ref(false)
+
+function highlightHTML(html) {
+    let formattedHTML = beautifyHtml(html, {
+        indent_size: 2,
+        preserve_newlines: true,
+        wrap_line_length: 120,
+    });
+    return hljs.highlight(formattedHTML, { language: 'xml' }).value;
+}
+
+function copyToClipBoard() { 
+  contenteditable.value = true;
+    const preElement = pretag.value;
+    if (preElement) {
+      const range = document.createRange();
+      const selection = window.getSelection();
+
+      range.selectNodeContents(preElement);
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      try {
+        const successful = document.execCommand("copy");
+        if (successful) {
+          copied.value = true;
+          setTimeout(() => {
+            copied.value = false;
+          }, 1000);
         }
-
-        selection.removeAllRanges();
-        this.contenteditable = false;
+      } catch (err) {
+        console.error("Error copying content: ", err);
       }
-    },
-  },
-};
+
+      selection.removeAllRanges();
+      contenteditable.value = false;
+    }
+} 
+   
 </script>
 
 <style>
@@ -120,8 +89,7 @@ export default {
   margin: 1rem 0;
   padding: 1rem;
   border-radius: 8px;
-  background-color: #292d3e;
-  background-color: #3a3f48;
+  background-color: #ececec; 
   overflow: auto;
   font-size: 0.9rem;
   padding-right: 40px;
@@ -153,7 +121,8 @@ code[class*="language-"], pre[class*="language-"] {
   cursor: pointer;
   padding: 2px 5px 0px 5px;
   border-radius: 3px;
-  color: rgb(203, 203, 203);
+  color: rgb(255, 255, 255);
+  background-color: #2e323a6b;
 }
 
 .copycode:hover,
