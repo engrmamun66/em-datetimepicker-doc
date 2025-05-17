@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted, defineProps } from 'vue'
+import {ref, onMounted } from 'vue'
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'
 import 'highlight.js/styles/github.css'

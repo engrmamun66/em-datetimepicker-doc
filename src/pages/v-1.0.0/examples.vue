@@ -16,7 +16,7 @@ let script_file = `<script src="http://localhost:3200/assets/em-datetimepicker-d
 
 <template>
      <h1>Examples ===== </h1> 
-     <p>
+     <div>
           
           <div class="hl low-b">Em-DateTimePicker </div> is a vanila javascript cdn solution to use, date time picker in any website with any platform.
           <span class="hl red mt-2">HTML</span>
@@ -24,7 +24,7 @@ let script_file = `<script src="http://localhost:3200/assets/em-datetimepicker-d
           <span class="hl yellow">React</span>
           <span class="hl green">Angular</span>
           
-     </p>
+     </div>
 
      <h1>Script Loading Process</h1> 
 

@@ -9,8 +9,11 @@ import ErrorView from '../pages/error.vue'
 
 const routes = [
     {
-        path: "/:version",
-        name: 'root',
+        path: "/", 
+        component: HomeView, 
+    },
+    {
+        path: "/:version", 
         component: HomeView, 
     },
     {
@@ -26,6 +29,7 @@ const routes = [
             
         ]
     },
+    /* =============================== */
     {
         path: "/*",
         name: 'error',

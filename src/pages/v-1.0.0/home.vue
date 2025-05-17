@@ -16,7 +16,7 @@ let script_file = `<script src="http://localhost:3200/assets/em-datetimepicker-d
 
 <template>
      <h1>Introduction</h1> 
-     <p>
+     <div>
           
           <div class="hl low-b">Em-DateTimePicker </div> is a vanila javascript cdn solution to use, date time picker in any website with any platform.
           <span class="hl red mt-2">HTML</span>
@@ -24,7 +24,7 @@ let script_file = `<script src="http://localhost:3200/assets/em-datetimepicker-d
           <span class="hl yellow">React</span>
           <span class="hl green">Angular</span>
           
-     </p>
+     </div>
 
      <h1>Script Loading Process</h1> 
 
@@ -34,26 +34,13 @@ let script_file = `<script src="http://localhost:3200/assets/em-datetimepicker-d
                <showCode v-show="i==1" lang="javascript" :inTabs="true" :code="script_file"></showCode>
           </template>
       </Tabs>
+ 
 
-     
+      <h2>
+          How to initialize-
+      </h2>
 
-
-     <numberedList :use-border="false" >
-          <li>ONe</li>
-          <li>Two </li>
-          <li>Three</li>
-     </numberedList>      
-
-
-     <myTable></myTable>
-
-
-      
-
-<!-- 
-     <hr v-for="x in 100" >
-
-     <h3 id="TEST">asdf</h3> -->
+    
 
 </template>
 

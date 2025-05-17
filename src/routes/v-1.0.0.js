@@ -14,8 +14,11 @@ const routes = [
         component: ExamplesOfUi,         
     },
     {
-        path: "/:version",
-        name: 'root',
+        path: "/", 
+        component: HomeView,         
+    },
+    {
+        path: "/:version", 
         component: HomeView,         
     },
     {
@@ -23,6 +26,7 @@ const routes = [
         name: 'home',
         component: HomeView,         
     },
+    /* =============================== */
     {
         path: "/:version/contact",
         name: 'contact',
